@@ -11,7 +11,7 @@ Bob: Welcome! I'm here to assist you with anything you need. What can I do for y
 
 # Create an instance of the language model
 model = Model(
-    model_path='C:/Users/marek/AppData/Local/nomic.ai/GPT4All/ggml-v3-13b-hermes-q5_1.bin',
+    model_path='C:/Users/..../AppData/Local/nomic.ai/GPT4All/ggml-v3-13b-hermes-q5_1.bin',
     n_ctx=512,
     prompt_context=prompt_context,
     prompt_prefix="User:",
