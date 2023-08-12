@@ -1,0 +1,66 @@
+<!-- index.html -->
+
+<html>
+<head>
+    <title>Assistance</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+</head>
+<body>
+    <section class="hero is-fullheight">
+        <div class="hero-body">
+            <div class="container">
+                <div class="columns is-centered">
+                    <div class="column is-half">
+                        <h1 class="title has-text-centered">Assistance</h1>
+
+                        <div id="chat-history" class="box"></div>
+
+                        <div class="field is-grouped">
+                            <div class="control is-expanded">
+                                <input type="text" id="user-input" class="input" placeholder="Enter your message...">
+                            </div>
+                            <div class="control">
+                                <button class="button is-primary" onclick="callBob()">Send</button>
+                            </div>
+                            <div class="control">
+                                <button class="button is-danger" onclick="clearChat()">Clear Chat</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="eel.js"></script>
+    <script>
+        async function callBob() {
+            let userInput = document.getElementById('user-input').value;
+            let response = await eel.get_bob_response(userInput)();
+            document.getElementById('user-input').value = '';
+
+            let chatHistoryElement = document.getElementById('chat-history');
+            let userPromptElement = document.createElement('div');
+            userPromptElement.classList.add('notification', 'is-primary');
+            userPromptElement.innerHTML = `<strong>User:</strong> ${userInput}`;
+
+            let botResponseElement = document.createElement('div');
+            botResponseElement.classList.add('notification', 'is-light');
+            botResponseElement.innerHTML = `<strong>Vladimir:</strong> ${response}`;
+
+            chatHistoryElement.appendChild(userPromptElement);
+            chatHistoryElement.appendChild(botResponseElement);
+        }
+
+        async function clearChat() {
+            await eel.clear_chat_history()();
+            document.getElementById('chat-history').innerHTML = '';
+        }
+
+        eel.expose(get_bob_response);
+        eel.expose(clear_chat_history);
+        eel.start("main.html");
+    </script>
+</body>
+</html>
