@@ -1,2 +1,5 @@
 # chatbot
-its a chatbot with a ui
+
+## install requirements
+
+pip install -r requirements.txt
