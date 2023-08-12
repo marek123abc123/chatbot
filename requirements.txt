@@ -1,0 +1,2 @@
+eel==0.14.0
+pyllamacpp==1.0.0
